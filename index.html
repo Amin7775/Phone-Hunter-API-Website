@@ -15,7 +15,16 @@
     <header>
         <h2 class="text-6xl">Hunting Phone</h2>
     </header>
-    <main>
+    <main class="container mx-auto mt-9">
+        <!-- Search -->
+        <section class="bg-gray-500 p-4 my-9">
+
+            <input id="search-field" type="text" placeholder="Search" class="input input-bordered w-full max-w-xs" />
+
+            <button onclick="handleSearch()" class="btn btn-accent">Search</button>
+        </section>
+
+        <!-- Search result -->
         <section>
             <!-- Phone Container -->
             <div id="phone-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
