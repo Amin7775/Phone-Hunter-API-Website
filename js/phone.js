@@ -13,6 +13,7 @@ const displayPhones = (phones) => {
     // step 1. get container 
     const phoneContainer = document.getElementById('phone-container')
 
+    toggleLoadingSpinner();
     // display show all button if there is more than 10 phones
     const showAllContainer = document.getElementById('show-all-container');
     if(phones.length > 9){
@@ -57,9 +58,18 @@ const displayPhones = (phones) => {
 // Handle Search Btn
 
 const handleSearch  = () =>{
+    toggleLoadingSpinner(true);
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
     loadPhone(searchText);
     searchField.value = '';
 }
 
+const toggleLoadingSpinner = (isLoading) =>{
+  const loadingSpinner= document.getElementById('loading-spinner');
+  if(isLoading){
+    loadingSpinner.classList.remove('hidden')
+  }else{
+    loadingSpinner.classList.add('hidden');
+  }
+}
