@@ -13,6 +13,17 @@ const displayPhones = (phones) => {
     // step 1. get container 
     const phoneContainer = document.getElementById('phone-container')
 
+    // display show all button if there is more than 10 phones
+    const showAllContainer = document.getElementById('show-all-container');
+    if(phones.length > 9){
+      showAllContainer.classList.remove('hidden');
+    }else{
+      showAllContainer.classList.add('hidden');
+    }
+
+    // Limit number of cards shown
+    phones = phones.slice(0,9)
+
     // clear phone container cards before adding new cards
     phoneContainer.textContent = '';
   phones.forEach((phone) => {
