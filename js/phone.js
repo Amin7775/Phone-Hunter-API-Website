@@ -1,7 +1,7 @@
 
 
 console.log("Connected to phone.js");
-const loadPhone = async (searchText, isShowALL) => {
+const loadPhone = async (searchText= '13', isShowALL) => {
   const res = await fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`);
 
   const data = await res.json();
@@ -30,7 +30,7 @@ const displayPhones = (phones , isShowALL) => {
     // clear phone container cards before adding new cards
     phoneContainer.textContent = '';
   phones.forEach((phone) => {
-    console.log(phone);
+    // console.log(phone);
     // 2 . Create a div
     const phoneCard = document.createElement("div");
     phoneCard.classList = `card w-96 bg-gray-100 shadow-xl p-2 lg:p-4`;
@@ -58,16 +58,38 @@ const displayPhones = (phones , isShowALL) => {
 };
 // Handle Show Details
 const handleShowDetails = async (id) =>{
-  console.log('Clicked on ', id);
+  // console.log('Clicked on ', id);
 
   // load individual data
   const res = await fetch(`https://openapi.programming-hero.com/api/phone/${id}`);
-  const data = res.json();
+  const data = await res.json();
   
-  console.log(data)
+  // console.log(data)
   const phone = data.data;
-  console.log( phone.brand)
 
+  
+  showPhoneDetails(phone)
+}
+
+// show phone details
+const showPhoneDetails = (phone) =>{
+  console.log(phone)
+
+  const phoneName = document.getElementById('phone-name');
+  phoneName.innerText = phone.name;
+
+  const showDetailsContainer = document.getElementById('show-details-container');
+  showDetailsContainer.innerHTML=`
+  <img src="${phone.image}" />
+  <p><b>Brand</b> : ${phone?.brand}<p/>
+  <p><b>Storage</b> : ${phone?.mainFeatures?.storage}<p/>
+  <p><b>Display Size</b> : ${phone?.mainFeatures?.displaySize
+  }<p/>
+  <p><b>Chipset</b> : ${phone?.mainFeatures?.chipSet}<p/>
+  <p><b>Realese Date</b> : ${phone?.releaseDate}<p/>
+  `
+  // show the modal
+  show_details_modal.showModal();
 }
 
 
@@ -95,3 +117,5 @@ const handleShowAll = () => {
   // const showAll=document.getElementById('show-all');
   handleSearch(true);
 }
+
+loadPhone();
